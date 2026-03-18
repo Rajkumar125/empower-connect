@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { AboutSection } from "@/components/AboutSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
 import { ProcessSection } from "@/components/ProcessSection";
+import { ImageShowcase } from "@/components/ImageShowcase";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
 
