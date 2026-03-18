@@ -1,61 +1,48 @@
-import bimaCareer from "@/assets/gallery/bima-sakhi-career.jpeg";
-import specialRecruitment from "@/assets/gallery/special-recruitment.jpeg";
-import buildFuture from "@/assets/gallery/build-future.jpeg";
-import bimaDetails from "@/assets/gallery/bima-sakhi-details.jpeg";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-
-const showcaseImages = [
-  { src: bimaCareer, alt: "Bima Sakhi Career Opportunity - Earn ₹7,000/month stipend with commission" },
-  { src: specialRecruitment, alt: "Special Recruitment Campaign - Join LIC as Woman Career Agent" },
-  { src: buildFuture, alt: "Build Your Own Future with LIC Bima Sakhi program" },
-  { src: bimaDetails, alt: "Bima Sakhi Mahila Career Agent Yojana - Complete details" },
-];
+import { Play } from "lucide-react";
+import { useState } from "react";
 
 export function ImageShowcase() {
+  const [isPlaying, setIsPlaying] = useState(false);
+
   return (
     <section id="showcase" className="py-20 md:py-28 bg-muted/50">
       <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <span className="inline-block px-4 py-1.5 rounded-full bg-gold/10 text-gold-dark text-sm font-medium mb-4">
-              Opportunities
+              Watch & Learn
             </span>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
               Your <span className="text-gradient">Career Awaits</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Explore the exciting career opportunities available through the Bima Sakhi program
+              Watch this video to learn more about the Bima Sakhi program and how it can transform your life
             </p>
           </div>
 
-          {/* Image Grid */}
-          <div className="grid sm:grid-cols-2 gap-6 mb-10">
-            {showcaseImages.map((image, index) => (
+          {/* Video Player */}
+          <div className="relative rounded-2xl overflow-hidden border border-border shadow-medium bg-card">
+            {!isPlaying ? (
               <div
-                key={index}
-                className="group relative rounded-2xl overflow-hidden border border-border shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1"
+                className="relative cursor-pointer group aspect-video bg-primary/5 flex items-center justify-center"
+                onClick={() => setIsPlaying(true)}
               >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
-                  loading="lazy"
-                />
+                <div className="w-20 h-20 rounded-full bg-gold-gradient flex items-center justify-center shadow-gold group-hover:scale-110 transition-transform duration-300">
+                  <Play className="w-8 h-8 text-foreground ml-1" />
+                </div>
+                <p className="absolute bottom-6 text-muted-foreground text-sm">Click to play video</p>
               </div>
-            ))}
-          </div>
-
-          {/* Gallery CTA */}
-          <div className="text-center">
-            <Link to="/gallery">
-              <Button variant="gold" size="lg">
-                View Full Gallery
-                <ArrowRight className="w-5 h-5" />
-              </Button>
-            </Link>
+            ) : (
+              <video
+                className="w-full aspect-video"
+                controls
+                autoPlay
+                src="/videos/bhimsakhi-video.mp4"
+              >
+                Your browser does not support the video tag.
+              </video>
+            )}
           </div>
         </div>
       </div>

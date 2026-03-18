@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import bimaDetails from "@/assets/gallery/bima-sakhi-details.jpeg";
 
 const contactInfo = [
   {
@@ -48,10 +49,7 @@ export function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1500));
-
     toast.success("Thank you for your interest! We'll contact you shortly.");
     setFormData({ name: "", phone: "", email: "", message: "" });
     setIsSubmitting(false);
@@ -78,6 +76,16 @@ export function ContactSection() {
           <div className="grid lg:grid-cols-5 gap-8">
             {/* Contact Info */}
             <div className="lg:col-span-2 space-y-6">
+              {/* Image card */}
+              <div className="rounded-2xl overflow-hidden border border-border shadow-soft">
+                <img
+                  src={bimaDetails}
+                  alt="Bima Sakhi Mahila Career Agent Yojana Details"
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+              </div>
+
               <div className="bg-hero-gradient rounded-2xl p-6 md:p-8 shadow-medium">
                 <h3 className="font-heading text-xl font-bold text-primary-foreground mb-6">
                   Contact Information
@@ -89,35 +97,22 @@ export function ContactSection() {
                         <info.icon className="w-5 h-5 text-gold" />
                       </div>
                       <div>
-                        <p className="text-primary-foreground/70 text-sm">
-                          {info.label}
-                        </p>
+                        <p className="text-primary-foreground/70 text-sm">{info.label}</p>
                         {info.href ? (
-                          <a
-                            href={info.href}
-                            className="text-primary-foreground font-medium hover:text-gold transition-colors"
-                          >
+                          <a href={info.href} className="text-primary-foreground font-medium hover:text-gold transition-colors">
                             {info.value}
                           </a>
                         ) : (
-                          <p className="text-primary-foreground font-medium">
-                            {info.value}
-                          </p>
+                          <p className="text-primary-foreground font-medium">{info.value}</p>
                         )}
                       </div>
                     </div>
                   ))}
                 </div>
-
-                {/* Office Hours */}
                 <div className="mt-8 pt-6 border-t border-primary-foreground/20">
-                  <h4 className="text-primary-foreground font-medium mb-3">
-                    Office Hours
-                  </h4>
+                  <h4 className="text-primary-foreground font-medium mb-3">Office Hours</h4>
                   <p className="text-primary-foreground/80 text-sm">
-                    Monday - Saturday: 9:00 AM - 6:00 PM
-                    <br />
-                    Sunday: Closed
+                    Monday - Saturday: 9:00 AM - 6:00 PM<br />Sunday: Closed
                   </p>
                 </div>
               </div>
@@ -131,106 +126,31 @@ export function ContactSection() {
                     <MessageSquare className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-heading text-xl font-bold text-foreground">
-                      Send us a Message
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      We'll respond within 24 hours
-                    </p>
+                    <h3 className="font-heading text-xl font-bold text-foreground">Send us a Message</h3>
+                    <p className="text-sm text-muted-foreground">We'll respond within 24 hours</p>
                   </div>
                 </div>
-
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div className="space-y-2">
-                      <label
-                        htmlFor="name"
-                        className="text-sm font-medium text-foreground"
-                      >
-                        Full Name *
-                      </label>
-                      <Input
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Enter your full name"
-                        required
-                        className="h-12"
-                      />
+                      <label htmlFor="name" className="text-sm font-medium text-foreground">Full Name *</label>
+                      <Input id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Enter your full name" required className="h-12" />
                     </div>
                     <div className="space-y-2">
-                      <label
-                        htmlFor="phone"
-                        className="text-sm font-medium text-foreground"
-                      >
-                        Phone Number *
-                      </label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="+91 98765 43210"
-                        required
-                        className="h-12"
-                      />
+                      <label htmlFor="phone" className="text-sm font-medium text-foreground">Phone Number *</label>
+                      <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="+91 98765 43210" required className="h-12" />
                     </div>
                   </div>
-
                   <div className="space-y-2">
-                    <label
-                      htmlFor="email"
-                      className="text-sm font-medium text-foreground"
-                    >
-                      Email Address *
-                    </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="your.email@example.com"
-                      required
-                      className="h-12"
-                    />
+                    <label htmlFor="email" className="text-sm font-medium text-foreground">Email Address *</label>
+                    <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="your.email@example.com" required className="h-12" />
                   </div>
-
                   <div className="space-y-2">
-                    <label
-                      htmlFor="message"
-                      className="text-sm font-medium text-foreground"
-                    >
-                      Your Message
-                    </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Tell us about your interest in becoming a Bima Sakhi..."
-                      rows={4}
-                      className="resize-none"
-                    />
+                    <label htmlFor="message" className="text-sm font-medium text-foreground">Your Message</label>
+                    <Textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Tell us about your interest in becoming a Bima Sakhi..." rows={4} className="resize-none" />
                   </div>
-
-                  <Button
-                    type="submit"
-                    variant="gold"
-                    size="lg"
-                    className="w-full"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      "Sending..."
-                    ) : (
-                      <>
-                        Send Message
-                        <Send className="w-4 h-4" />
-                      </>
-                    )}
+                  <Button type="submit" variant="gold" size="lg" className="w-full" disabled={isSubmitting}>
+                    {isSubmitting ? "Sending..." : (<>Send Message <Send className="w-4 h-4" /></>)}
                   </Button>
                 </form>
               </div>

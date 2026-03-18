@@ -14,6 +14,9 @@ import mahilaCareerAgent from "@/assets/gallery/mahila-career-agent.jpeg";
 import ladiesRecruitment from "@/assets/gallery/ladies-recruitment.jpeg";
 import womenEmpowerment from "@/assets/gallery/women-empowerment.jpeg";
 import goldenOpportunity from "@/assets/gallery/golden-opportunity.jpeg";
+import confidentWoman from "@/assets/gallery/confident-woman.jpeg";
+import goldenOpportunityWomen from "@/assets/gallery/golden-opportunity-women.jpeg";
+import womenAdvisor from "@/assets/gallery/women-advisor.jpeg";
 
 const allImages = [
   { src: bimaCareer, alt: "Bima Sakhi Career Opportunity" },
@@ -25,6 +28,9 @@ const allImages = [
   { src: ladiesRecruitment, alt: "Lady's Special Recruitment" },
   { src: womenEmpowerment, alt: "Women Empowerment" },
   { src: goldenOpportunity, alt: "Golden Opportunity - Jeevan Bima" },
+  { src: confidentWoman, alt: "Be a Confident & Independent Business Woman" },
+  { src: goldenOpportunityWomen, alt: "Golden Opportunity for Women - LIC" },
+  { src: womenAdvisor, alt: "Women Advisor Special Recruitment Scheme" },
 ];
 
 const Gallery = () => {
@@ -36,7 +42,6 @@ const Gallery = () => {
       <main className="pt-24 pb-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            {/* Back + Header */}
             <div className="mb-12">
               <Link to="/">
                 <Button variant="ghost" size="sm" className="mb-4">
@@ -52,7 +57,6 @@ const Gallery = () => {
               </p>
             </div>
 
-            {/* Gallery Grid */}
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
               {allImages.map((image, index) => (
                 <div
@@ -76,16 +80,9 @@ const Gallery = () => {
         </div>
       </main>
 
-      {/* Lightbox */}
       {lightbox !== null && (
-        <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
-          onClick={() => setLightbox(null)}
-        >
-          <button
-            className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
-            onClick={() => setLightbox(null)}
-          >
+        <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4" onClick={() => setLightbox(null)}>
+          <button className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors" onClick={() => setLightbox(null)}>
             <X className="w-8 h-8" />
           </button>
           <img
