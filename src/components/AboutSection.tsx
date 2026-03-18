@@ -1,4 +1,5 @@
 import { Target, Heart, Lightbulb, Shield } from "lucide-react";
+import bimaCareer from "@/assets/gallery/bima-sakhi-career.jpeg";
 
 const values = [
   {
@@ -46,21 +47,16 @@ export function AboutSection() {
 
           {/* Main Content */}
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
-            {/* Left - Image/Visual */}
+            {/* Left - Image */}
             <div className="relative">
               <div className="aspect-square rounded-3xl bg-hero-gradient p-1 shadow-medium">
-                <div className="w-full h-full rounded-3xl bg-card flex items-center justify-center overflow-hidden">
-                  <div className="text-center p-8">
-                    <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-accent flex items-center justify-center">
-                      <Shield className="w-16 h-16 text-primary" />
-                    </div>
-                    <h3 className="font-heading text-2xl font-bold text-foreground mb-3">
-                      Join 50,000+ Successful Women
-                    </h3>
-                    <p className="text-muted-foreground">
-                      Who have transformed their lives through Bima Sakhi
-                    </p>
-                  </div>
+                <div className="w-full h-full rounded-3xl overflow-hidden">
+                  <img
+                    src={bimaCareer}
+                    alt="Join 50,000+ Successful Women - Bima Sakhi Career"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
               </div>
               {/* Decorative elements */}

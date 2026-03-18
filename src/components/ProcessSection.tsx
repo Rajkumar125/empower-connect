@@ -1,4 +1,5 @@
 import { FileText, GraduationCap, Award, Briefcase, CheckCircle2 } from "lucide-react";
+import buildFuture from "@/assets/gallery/build-future.jpeg";
 
 const steps = [
   {
@@ -59,14 +60,11 @@ export function ProcessSection() {
 
           {/* Process Steps */}
           <div className="relative mb-20">
-            {/* Connection Line */}
             <div className="hidden lg:block absolute top-24 left-0 right-0 h-0.5 bg-border" />
-            
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {steps.map((step, index) => (
                 <div key={step.title} className="relative">
                   <div className="text-center">
-                    {/* Step Number */}
                     <div className="relative inline-block mb-6">
                       <div className="w-20 h-20 rounded-2xl bg-hero-gradient flex items-center justify-center shadow-medium mx-auto">
                         <step.icon className="w-10 h-10 text-primary-foreground" />
@@ -78,17 +76,15 @@ export function ProcessSection() {
                     <h4 className="font-heading text-lg font-semibold text-foreground mb-2">
                       {step.title}
                     </h4>
-                    <p className="text-sm text-muted-foreground">
-                      {step.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{step.description}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Eligibility & Documents */}
-          <div className="grid lg:grid-cols-2 gap-8">
+          {/* Eligibility & Documents with Image */}
+          <div className="grid lg:grid-cols-3 gap-8 mb-12">
             {/* Eligibility */}
             <div className="bg-card rounded-2xl border border-border shadow-soft p-6 md:p-8">
               <div className="flex items-center gap-3 mb-6">
@@ -111,6 +107,16 @@ export function ProcessSection() {
               </ul>
             </div>
 
+            {/* Image in the middle */}
+            <div className="rounded-2xl overflow-hidden border border-border shadow-soft">
+              <img
+                src={buildFuture}
+                alt="Build Your Own Future with LIC Bima Sakhi"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
             {/* Documents */}
             <div className="bg-card rounded-2xl border border-border shadow-soft p-6 md:p-8">
               <div className="flex items-center gap-3 mb-6">
@@ -127,8 +133,8 @@ export function ProcessSection() {
                     key={index}
                     className="flex items-center justify-between p-3 rounded-xl bg-muted/50 hover:bg-muted transition-colors"
                   >
-                    <span className="text-foreground">{doc.name}</span>
-                    <span className="text-sm text-muted-foreground bg-background px-3 py-1 rounded-lg">
+                    <span className="text-foreground text-sm">{doc.name}</span>
+                    <span className="text-xs text-muted-foreground bg-background px-2 py-1 rounded-lg">
                       {doc.count}
                     </span>
                   </li>
@@ -138,7 +144,7 @@ export function ProcessSection() {
           </div>
 
           {/* Fees Section */}
-          <div className="mt-12 p-6 md:p-8 bg-hero-gradient rounded-2xl shadow-medium text-center">
+          <div className="p-6 md:p-8 bg-hero-gradient rounded-2xl shadow-medium text-center">
             <h3 className="font-heading text-2xl md:text-3xl font-bold text-primary-foreground mb-6">
               Registration Fees
             </h3>
