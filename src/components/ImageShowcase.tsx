@@ -23,26 +23,26 @@ export function ImageShowcase() {
 
           {/* Video Player */}
           <div className="relative rounded-2xl overflow-hidden border border-border shadow-medium bg-card">
-            {!isPlaying ? (
-              <div
-                className="relative cursor-pointer group aspect-video bg-primary/5 flex items-center justify-center"
-                onClick={() => setIsPlaying(true)}
-              >
-                <div className="w-20 h-20 rounded-full bg-gold-gradient flex items-center justify-center shadow-gold group-hover:scale-110 transition-transform duration-300">
-                  <Play className="w-8 h-8 text-foreground ml-1" />
-                </div>
-                <p className="absolute bottom-6 text-muted-foreground text-sm">Click to play video</p>
-              </div>
-            ) : (
+            <div className="relative cursor-pointer group aspect-video" onClick={() => setIsPlaying(true)}>
               <video
-                className="w-full aspect-video"
-                controls
-                autoPlay
+                className="w-full aspect-video object-cover"
                 src="/videos/bhimsakhi-video.mp4"
+                controls={isPlaying}
+                autoPlay={isPlaying}
+                muted={!isPlaying}
+                playsInline
+                preload="metadata"
               >
                 Your browser does not support the video tag.
               </video>
-            )}
+              {!isPlaying && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                  <div className="w-20 h-20 rounded-full bg-gold-gradient flex items-center justify-center shadow-gold group-hover:scale-110 transition-transform duration-300">
+                    <Play className="w-8 h-8 text-foreground ml-1" />
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

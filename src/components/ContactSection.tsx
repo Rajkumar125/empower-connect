@@ -10,24 +10,24 @@ const contactInfo = [
   {
     icon: User,
     label: "Development Officer",
-    value: "Rajesh Kumar Sharma",
+    value: "James Kindo",
   },
   {
     icon: Phone,
-    label: "Phone Number",
-    value: "+91 98765 43210",
-    href: "tel:+919876543210",
+    label: "Mobile No",
+    value: "+91 8962295977",
+    href: "tel:+918962295977",
   },
   {
     icon: Mail,
-    label: "Email Address",
-    value: "bimasakhi.support@lic.co.in",
-    href: "mailto:bimasakhi.support@lic.co.in",
+    label: "Email Id",
+    value: "jameskindo90@gmail.com",
+    href: "mailto:jameskindo90@gmail.com",
   },
   {
     icon: MapPin,
     label: "Office Address",
-    value: "LIC Branch Office, Sector 12, New Delhi - 110001",
+    value: "Vivekanand Housing Board Colony, Behind KV School, Damoh",
   },
 ];
 

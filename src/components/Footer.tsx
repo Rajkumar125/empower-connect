@@ -94,17 +94,16 @@ export function Footer() {
           <div>
             <h4 className="font-heading font-semibold text-lg mb-4">Contact Us</h4>
             <address className="not-italic text-sm text-primary-foreground/70 space-y-2">
-              <p>LIC Branch Office</p>
-              <p>Sector 12, New Delhi</p>
-              <p>PIN: 110001</p>
+              <p>Vivekanand Housing Board Colony</p>
+              <p>Behind KV School, Damoh</p>
               <p className="pt-2">
-                <a href="tel:+919876543210" className="hover:text-gold transition-colors">
-                  +91 98765 43210
+                <a href="tel:+918962295977" className="hover:text-gold transition-colors">
+                  +91 8962295977
                 </a>
               </p>
               <p>
-                <a href="mailto:bimasakhi.support@lic.co.in" className="hover:text-gold transition-colors">
-                  bimasakhi.support@lic.co.in
+                <a href="mailto:jameskindo90@gmail.com" className="hover:text-gold transition-colors">
+                  jameskindo90@gmail.com
                 </a>
               </p>
             </address>
