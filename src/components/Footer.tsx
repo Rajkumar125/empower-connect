@@ -116,8 +116,11 @@ export function Footer() {
             <p className="text-primary-foreground/60 text-sm text-center md:text-left">
               © {new Date().getFullYear()} Bima Sakhi Program. All rights reserved.
             </p>
+            <p className="text-primary-foreground/60 text-sm text-center">
+              Powered by RaSPire Tech
+            </p>
             <p className="text-primary-foreground/60 text-sm text-center md:text-right">
-              Regulated by IRDAI | Lic. No. 512
+              Regulated by IRDAI | Lic. No. XX
             </p>
           </div>
         </div>
