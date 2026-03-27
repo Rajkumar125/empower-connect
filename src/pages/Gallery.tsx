@@ -3,7 +3,7 @@ import { Footer } from "@/components/Footer";
 import { ArrowLeft, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import bimaCareer from "@/assets/gallery/bima-sakhi-career.jpeg";
 import specialRecruitment from "@/assets/gallery/special-recruitment.jpeg";
@@ -35,6 +35,10 @@ const allImages = [
 
 const Gallery = () => {
   const [lightbox, setLightbox] = useState<number | null>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">

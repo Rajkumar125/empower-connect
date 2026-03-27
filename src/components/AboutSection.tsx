@@ -1,5 +1,5 @@
 import { Target, Heart, Lightbulb, Shield } from "lucide-react";
-import bimaCareer from "@/assets/gallery/bima-sakhi-career.jpeg";
+import womenEmpowerment from "@/assets/gallery/women-empowerment.jpeg";
 
 const values = [
   {
@@ -52,8 +52,8 @@ export function AboutSection() {
               <div className="rounded-3xl bg-hero-gradient p-1 shadow-medium">
                 <div className="w-full rounded-3xl overflow-hidden">
                   <img
-                    src={bimaCareer}
-                    alt="Join 50,000+ Successful Women - Bima Sakhi Career"
+                    src={womenEmpowerment}
+                    alt="Women Empowerment - Bima Sakhi Program"
                     className="w-full h-auto object-contain rounded-3xl"
                     loading="lazy"
                   />

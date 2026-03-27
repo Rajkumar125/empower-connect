@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu, X, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const navItems = [
   { name: "Home", href: "#home" },
@@ -14,13 +14,25 @@ const navItems = [
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleHashClick = (hash: string) => {
+    if (location.pathname !== "/") {
+      navigate("/" + hash);
+    } else {
+      const el = document.querySelector(hash);
+      el?.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-soft">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-2 group">
+          <Link to="/" className="flex items-center gap-2 group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-hero-gradient flex items-center justify-center shadow-soft group-hover:shadow-medium transition-shadow">
               <Shield className="w-5 h-5 md:w-6 md:h-6 text-primary-foreground" />
             </div>
@@ -28,7 +40,7 @@ export function Header() {
               <span className="font-heading font-bold text-lg md:text-xl text-foreground">Bima Sakhi</span>
               <span className="text-[10px] md:text-xs text-muted-foreground -mt-1">Empowering Futures</span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
@@ -42,20 +54,20 @@ export function Header() {
                   {item.name}
                 </Link>
               ) : (
-                <a
+                <button
                   key={item.name}
-                  href={item.href}
+                  onClick={() => handleHashClick(item.href)}
                   className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-colors rounded-lg hover:bg-accent"
                 >
                   {item.name}
-                </a>
+                </button>
               )
             )}
           </nav>
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button variant="gold" size="default">Apply Now</Button>
+            <button onClick={() => handleHashClick("#contact")}><Button variant="gold" size="default">Apply Now</Button></button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -83,18 +95,17 @@ export function Header() {
                     {item.name}
                   </Link>
                 ) : (
-                  <a
+                  <button
                     key={item.name}
-                    href={item.href}
-                    className="px-4 py-3 text-sm font-medium text-foreground/80 hover:text-primary hover:bg-accent rounded-lg transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => handleHashClick(item.href)}
+                    className="px-4 py-3 text-sm font-medium text-foreground/80 hover:text-primary hover:bg-accent rounded-lg transition-colors text-left"
                   >
                     {item.name}
-                  </a>
+                  </button>
                 )
               )}
               <div className="px-4 pt-2">
-                <Button variant="gold" className="w-full">Apply Now</Button>
+                <button onClick={() => handleHashClick("#contact")} className="w-full"><Button variant="gold" className="w-full">Apply Now</Button></button>
               </div>
             </nav>
           </div>
