@@ -108,11 +108,11 @@ export function ProcessSection() {
             </div>
 
             {/* Image in the middle */}
-            <div className="rounded-2xl overflow-hidden border border-border shadow-soft">
+            <div className="rounded-2xl overflow-hidden border border-border shadow-soft flex items-center">
               <img
                 src={buildFuture}
                 alt="Build Your Own Future with LIC Bima Sakhi"
-                className="w-full h-full object-cover"
+                className="w-full h-auto object-contain"
                 loading="lazy"
               />
             </div>

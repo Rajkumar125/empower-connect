@@ -49,12 +49,12 @@ export function AboutSection() {
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
             {/* Left - Image */}
             <div className="relative">
-              <div className="aspect-square rounded-3xl bg-hero-gradient p-1 shadow-medium">
-                <div className="w-full h-full rounded-3xl overflow-hidden">
+              <div className="rounded-3xl bg-hero-gradient p-1 shadow-medium">
+                <div className="w-full rounded-3xl overflow-hidden">
                   <img
                     src={bimaCareer}
                     alt="Join 50,000+ Successful Women - Bima Sakhi Career"
-                    className="w-full h-full object-cover"
+                    className="w-full h-auto object-contain rounded-3xl"
                     loading="lazy"
                   />
                 </div>

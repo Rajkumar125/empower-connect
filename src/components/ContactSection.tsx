@@ -27,7 +27,7 @@ const contactInfo = [
   {
     icon: MapPin,
     label: "Office Address",
-    value: "Vivekanand Housing Board Colony, Behind KV School, Damoh",
+    value: "Vivekanand Housing Board Colony, Behind KV School, Damoh - 470661",
   },
 ];
 

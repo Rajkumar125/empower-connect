@@ -83,11 +83,11 @@ export function FeaturesSection() {
 
           {/* Stipend Table with Image */}
           <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <div className="rounded-2xl overflow-hidden border border-border shadow-soft">
+            <div className="rounded-2xl overflow-hidden border border-border shadow-soft flex items-center">
               <img
                 src={specialRecruitment}
                 alt="Special Recruitment Campaign - Join LIC"
-                className="w-full h-full object-cover"
+                className="w-full h-auto object-contain"
                 loading="lazy"
               />
             </div>

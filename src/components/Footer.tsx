@@ -95,7 +95,7 @@ export function Footer() {
             <h4 className="font-heading font-semibold text-lg mb-4">Contact Us</h4>
             <address className="not-italic text-sm text-primary-foreground/70 space-y-2">
               <p>Vivekanand Housing Board Colony</p>
-              <p>Behind KV School, Damoh</p>
+              <p>Behind KV School, Damoh - 470661</p>
               <p className="pt-2">
                 <a href="tel:+918962295977" className="hover:text-gold transition-colors">
                   +91 8962295977
