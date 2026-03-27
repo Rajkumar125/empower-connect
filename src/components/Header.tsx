@@ -54,20 +54,20 @@ export function Header() {
                   {item.name}
                 </Link>
               ) : (
-                <a
+                <button
                   key={item.name}
-                  href={item.href}
+                  onClick={() => handleHashClick(item.href)}
                   className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-colors rounded-lg hover:bg-accent"
                 >
                   {item.name}
-                </a>
+                </button>
               )
             )}
           </nav>
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <a href="#contact"><Button variant="gold" size="default">Apply Now</Button></a>
+            <button onClick={() => handleHashClick("#contact")}><Button variant="gold" size="default">Apply Now</Button></button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -95,18 +95,17 @@ export function Header() {
                     {item.name}
                   </Link>
                 ) : (
-                  <a
+                  <button
                     key={item.name}
-                    href={item.href}
-                    className="px-4 py-3 text-sm font-medium text-foreground/80 hover:text-primary hover:bg-accent rounded-lg transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => handleHashClick(item.href)}
+                    className="px-4 py-3 text-sm font-medium text-foreground/80 hover:text-primary hover:bg-accent rounded-lg transition-colors text-left"
                   >
                     {item.name}
-                  </a>
+                  </button>
                 )
               )}
               <div className="px-4 pt-2">
-                <a href="#contact"><Button variant="gold" className="w-full">Apply Now</Button></a>
+                <button onClick={() => handleHashClick("#contact")} className="w-full"><Button variant="gold" className="w-full">Apply Now</Button></button>
               </div>
             </nav>
           </div>
