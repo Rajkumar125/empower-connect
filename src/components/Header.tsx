@@ -20,7 +20,7 @@ export function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-2 group">
+          <Link to="/" className="flex items-center gap-2 group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-hero-gradient flex items-center justify-center shadow-soft group-hover:shadow-medium transition-shadow">
               <Shield className="w-5 h-5 md:w-6 md:h-6 text-primary-foreground" />
             </div>
@@ -28,7 +28,7 @@ export function Header() {
               <span className="font-heading font-bold text-lg md:text-xl text-foreground">Bima Sakhi</span>
               <span className="text-[10px] md:text-xs text-muted-foreground -mt-1">Empowering Futures</span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
@@ -55,7 +55,7 @@ export function Header() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button variant="gold" size="default">Apply Now</Button>
+            <a href="#contact"><Button variant="gold" size="default">Apply Now</Button></a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -94,7 +94,7 @@ export function Header() {
                 )
               )}
               <div className="px-4 pt-2">
-                <Button variant="gold" className="w-full">Apply Now</Button>
+                <a href="#contact"><Button variant="gold" className="w-full">Apply Now</Button></a>
               </div>
             </nav>
           </div>
