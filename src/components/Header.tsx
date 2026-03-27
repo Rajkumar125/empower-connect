@@ -14,6 +14,18 @@ const navItems = [
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleHashClick = (hash: string) => {
+    if (location.pathname !== "/") {
+      navigate("/" + hash);
+    } else {
+      const el = document.querySelector(hash);
+      el?.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-soft">
