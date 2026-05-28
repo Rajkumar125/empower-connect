@@ -216,6 +216,27 @@ export function ContactSection() {
           </div>
         </div>
       </div>
+
+      <Dialog open={dialog.open} onOpenChange={(open) => setDialog((d) => ({ ...d, open }))}>
+        <DialogContent>
+          <DialogHeader>
+            <div className="flex items-center gap-3">
+              {dialog.type === "success" ? (
+                <CheckCircle2 className="w-7 h-7 text-green-600" />
+              ) : (
+                <AlertCircle className="w-7 h-7 text-destructive" />
+              )}
+              <DialogTitle>{dialog.title}</DialogTitle>
+            </div>
+            <DialogDescription className="pt-2">{dialog.message}</DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button onClick={() => setDialog((d) => ({ ...d, open: false }))} variant={dialog.type === "success" ? "gold" : "default"}>
+              OK
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }
