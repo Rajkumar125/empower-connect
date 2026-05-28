@@ -1,5 +1,6 @@
 import { ArrowRight, Users, TrendingUp, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const stats = [
   { icon: Users, value: "50,000+", label: "Active Members" },
@@ -8,6 +9,27 @@ const stats = [
 ];
 
 export function HeroSection() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleApplyClick = () => {
+    if (location.pathname !== "/") {
+      navigate("/#contact");
+    } else {
+      const el = document.querySelector("#contact");
+      el?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleLearnMoreClick = () => {
+    if (location.pathname !== "/") {
+      navigate("/#about");
+    } else {
+      const el = document.querySelector("#about");
+      el?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section id="home" className="relative min-h-screen flex items-center bg-hero-gradient overflow-hidden">
       {/* Decorative elements */}
@@ -42,11 +64,11 @@ export function HeroSection() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            <Button variant="hero" size="xl">
+            <Button variant="hero" size="xl" onClick={handleApplyClick}>
               Apply Now
               <ArrowRight className="w-5 h-5" />
             </Button>
-            <Button variant="heroOutline" size="xl">
+            <Button variant="heroOutline" size="xl" onClick={handleLearnMoreClick}>
               Learn More
             </Button>
           </div>
