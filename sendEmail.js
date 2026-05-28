@@ -1,17 +1,27 @@
 import nodemailer from "nodemailer";
 
+const mailUser = process.env.MAIL_USER;
+const mailPass = process.env.MAIL_PASS;
+const mailTo = process.env.MAIL_TO;
+
+if (!mailUser || !mailPass || !mailTo) {
+  console.warn(
+    "⚠️ Email config missing. MAIL_USER, MAIL_PASS, and MAIL_TO are required for email notifications."
+  );
+}
+
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
+    user: mailUser,
+    pass: mailPass,
   },
 });
 
 const sendEmail = async (entry) => {
   const mailOptions = {
-    from: `"Empower Connect" <${process.env.MAIL_USER}>`,
-    to: process.env.MAIL_TO, // maintainer to receive the mail
+    from: `"Empower Connect" <${mailUser}>`,
+    to: mailTo, // maintainer to receive the mail
     subject: "New Registration",
     html: `
       <h3>New Registration</h3>
@@ -23,7 +33,12 @@ const sendEmail = async (entry) => {
     `,
   };
 
-  await transporter.sendMail(mailOptions);
+  try {
+    await transporter.sendMail(mailOptions);
+  } catch (err) {
+    console.error("❌ sendEmail failed:", err);
+    throw err;
+  }
 };
 
 export { sendEmail };

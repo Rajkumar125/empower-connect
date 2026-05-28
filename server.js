@@ -17,6 +17,16 @@ const PORT = process.env.PORT || 5000;
 let doc;
 let isRetryRunning = false;
 
+const pad = (value) => String(value).padStart(2, "0");
+const formatTimestamp = () => {
+  const now = new Date();
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}:${pad(now.getHours())}.${pad(now.getMinutes())}.${pad(now.getSeconds())}`;
+};
+
+const logInfo = (...args) => console.log(`${formatTimestamp()} -`, ...args);
+const logWarn = (...args) => console.warn(`${formatTimestamp()} -`, ...args);
+const logError = (...args) => console.error(`${formatTimestamp()} -`, ...args);
+
 /* =========================
    GOOGLE SHEETS SETUP
 ========================= */
@@ -34,9 +44,9 @@ async function initializeGoogleSheets() {
     doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID, auth);
     await doc.loadInfo();
 
-    console.log(`✅ Google Sheet loaded: ${doc.title}`);
+    logInfo(`Google Sheet loaded: ${doc.title}`);
   } catch (error) {
-    console.error("❌ Google Sheets init failed:", error.message);
+    logError("Google Sheets init failed:", error.message);
     doc = null;
   }
 }
@@ -57,6 +67,14 @@ async function saveToSheet(entry) {
   if (!doc) throw new Error("Sheets not initialized");
 
   const sheet = doc.sheetsByIndex[0];
+  
+  // Check if phone number already exists
+  const rows = await sheet.getRows();
+  const phoneExists = rows.some(row => row.get("Phone") === entry.Phone);
+  if (phoneExists) {
+    throw new Error("This mobile number is already registered. Please use a different mobile number.");
+  }
+  
   await sheet.addRows([entry]);
 }
 
@@ -68,7 +86,7 @@ const retryFailedEntries = async () => {
   if (isRetryRunning) return;
 
   isRetryRunning = true;
-  console.log("🔄 Running retry job...");
+  logInfo("Running retry job...");
 
   try {
     if (!doc) {
@@ -77,7 +95,7 @@ const retryFailedEntries = async () => {
 
     const retries = await readRetries();
     if (retries.length === 0) {
-      console.log("No retries pending");
+      logInfo("No retries pending");
       return;
     }
 
@@ -87,7 +105,7 @@ const retryFailedEntries = async () => {
     for (const entry of retries) {
       try {
         await sheet.addRows([entry]);
-        console.log("✅ Synced:", entry.Name);
+        logInfo("Synced:", entry.Name);
       } catch {
         remaining.push(entry);
       }
@@ -95,7 +113,7 @@ const retryFailedEntries = async () => {
 
     await writeRetries(remaining);
   } catch (err) {
-    console.error("Retry job failed:", err.message);
+    logError("Retry job failed:", err.message);
   } finally {
     isRetryRunning = false;
   }
@@ -117,7 +135,10 @@ app.get("/api/health", (req, res) => {
 app.post("/api/register", async (req, res) => {
   const { name, email, phone, message } = req.body;
 
+  logInfo(`Registration request received for ${name || "unknown user"}`);
+
   if (!name || !phone) {
+    logWarn("/api/register missing required fields");
     return res.status(400).json({ error: "Name and phone required" });
   }
 
@@ -125,17 +146,17 @@ app.post("/api/register", async (req, res) => {
 
   try {
     await saveToSheet(entry);
-    await sendEmail(entry);
-
-    return res.json({
-      success: true,
-      message: "Saved successfully",
-    });
-
+    logInfo("Saved registration in Google Sheet", { timestamp: entry.Timestamp });
   } catch (err) {
-    console.error("❌ Sheets failed, saving locally:", err.message);
-
+    logError("saveToSheet failed:", err);
+    
+    // Check if it's a duplicate phone number error
+    if (err.message.includes("mobile number is already registered")) {
+      return res.status(400).json({ error: err.message });
+    }
+    
     await addRetry(entry);
+    logInfo("Registration saved locally for retry", { timestamp: entry.Timestamp });
 
     return res.json({
       success: true,
@@ -143,6 +164,24 @@ app.post("/api/register", async (req, res) => {
       message: "Saved locally, will sync later",
     });
   }
+
+  try {
+    await sendEmail(entry);
+    logInfo("Email notification sent successfully", { timestamp: entry.Timestamp });
+  } catch (err) {
+    logError("sendEmail failed:", err);
+
+    return res.json({
+      success: true,
+      fallback: true,
+      message: "Saved successfully, but email notification failed.",
+    });
+  }
+
+  return res.json({
+    success: true,
+    message: "Saved successfully",
+  });
 });
 
 /* =========================
@@ -160,7 +199,7 @@ app.get("*", (req, res) => {
 ========================= */
 
 app.use((err, req, res, next) => {
-  console.error("Unexpected error:", err);
+  logError("Unexpected error:", err);
   res.status(500).json({ error: "Internal server error" });
 });
 
@@ -172,8 +211,8 @@ const startServer = async () => {
   await initializeGoogleSheets();
 
   app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-    console.log(`Google Sheets: ${doc ? "Connected" : "Fallback mode"}`);
+    logInfo(`Server running on port ${PORT}`);
+    logInfo(`Google Sheets: ${doc ? "Connected" : "Fallback mode"}`);
   });
 };
 

@@ -39,6 +39,7 @@ export function ContactSection() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -48,11 +49,40 @@ export function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!formData.name.trim() || !formData.phone.trim()) {
+      setSubmitError("Please enter your name and phone number.");
+      return;
+    }
+
+    setSubmitError("");
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    toast.success("Thank you for your interest! We'll contact you shortly.");
-    setFormData({ name: "", phone: "", email: "", message: "" });
-    setIsSubmitting(false);
+
+    try {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || data.error) {
+        throw new Error(data.error || "Failed to submit form");
+      }
+
+      toast.success(data.message || "Thank you for your interest! We'll contact you shortly.");
+      setFormData({ name: "", phone: "", email: "", message: "" });
+    } catch (error: any) {
+      console.error("Register error:", error);
+      const message = error?.message || "Unable to send your message. Please try again.";
+      setSubmitError(message);
+      toast.error(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -149,6 +179,9 @@ export function ContactSection() {
                     <label htmlFor="message" className="text-sm font-medium text-foreground">Your Message</label>
                     <Textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Tell us about your interest in becoming a Bima Sakhi..." rows={4} className="resize-none" />
                   </div>
+                  {submitError ? (
+                    <p className="text-sm text-destructive">{submitError}</p>
+                  ) : null}
                   <Button type="submit" variant="gold" size="lg" className="w-full" disabled={isSubmitting}>
                     {isSubmitting ? "Sending..." : (<>Send Message <Send className="w-4 h-4" /></>)}
                   </Button>
