@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Phone, Mail, MapPin, Send, User, MessageSquare } from "lucide-react";
+import { Phone, Mail, MapPin, Send, User, MessageSquare, CheckCircle2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import bimaDetails from "@/assets/gallery/bima-sakhi-details.jpeg";
 
 const contactInfo = [
