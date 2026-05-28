@@ -57,7 +57,13 @@ export function ContactSection() {
   const validate = () => {
     if (!formData.name.trim()) return "Please enter your full name.";
     if (!formData.phone.trim()) return "Please enter your phone number.";
-    if (!/^[+\d][\d\s-]{7,15}$/.test(formData.phone.trim())) return "Please enter a valid phone number.";
+    // Indian mobile number validation
+    // Supports: +91 98765 43210, 919876543210, 9876543210
+    const indianPhoneRegex = /^(?:\+91[\s]?|91[\s]?)?[6-9]\d{9}$|^\+91[\s]?[0-9]{10}$/;
+    const cleanedPhone = formData.phone.trim().replace(/[\s-]/g, "");
+    if (!indianPhoneRegex.test(formData.phone.trim()) && !/^[6-9]\d{9}$/.test(cleanedPhone)) {
+      return "Please enter a valid 10-digit Indian mobile number.";
+    }
     if (!formData.email.trim()) return "Please enter your email address.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) return "Please enter a valid email address.";
     return "";
