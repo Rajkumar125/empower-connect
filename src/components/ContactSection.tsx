@@ -41,6 +41,12 @@ export function ContactSection() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [dialog, setDialog] = useState<{ open: boolean; type: "success" | "error"; title: string; message: string }>({
+    open: false,
+    type: "success",
+    title: "",
+    message: "",
+  });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -48,11 +54,22 @@ export function ContactSection() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const validate = () => {
+    if (!formData.name.trim()) return "Please enter your full name.";
+    if (!formData.phone.trim()) return "Please enter your phone number.";
+    if (!/^[+\d][\d\s-]{7,15}$/.test(formData.phone.trim())) return "Please enter a valid phone number.";
+    if (!formData.email.trim()) return "Please enter your email address.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) return "Please enter a valid email address.";
+    return "";
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.name.trim() || !formData.phone.trim()) {
-      setSubmitError("Please enter your name and phone number.");
+    const validationError = validate();
+    if (validationError) {
+      setSubmitError(validationError);
+      setDialog({ open: true, type: "error", title: "Invalid details", message: validationError });
       return;
     }
 
@@ -74,13 +91,20 @@ export function ContactSection() {
         throw new Error(data.error || "Failed to submit form");
       }
 
-      toast.success(data.message || "Thank you for your interest! We'll contact you shortly.");
+      toast.success("Details submitted successfully");
+      setDialog({
+        open: true,
+        type: "success",
+        title: "Details submitted successfully",
+        message: data.message || "Thank you for your interest! Our team will contact you shortly.",
+      });
       setFormData({ name: "", phone: "", email: "", message: "" });
     } catch (error: any) {
       console.error("Register error:", error);
       const message = error?.message || "Unable to send your message. Please try again.";
       setSubmitError(message);
       toast.error(message);
+      setDialog({ open: true, type: "error", title: "Submission failed", message });
     } finally {
       setIsSubmitting(false);
     }
