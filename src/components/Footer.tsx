@@ -16,7 +16,7 @@ const resources = [
 ];
 
 const socialLinks = [
-  { icon: Facebook, href: "https://www.facebook.com/share/1EPfyJLcwM/", label: "Facebook" },
+  { icon: Facebook, href: "https://www.facebook.com/people/Job-You-Want/100069148661528/", label: "Facebook" },
 ];
 
 export function Footer() {
