@@ -1,4 +1,4 @@
-import { Shield, Facebook, Twitter, Instagram, Linkedin, Youtube } from "lucide-react";
+import { Shield, Facebook } from "lucide-react";
 
 const quickLinks = [
   { name: "Home", href: "#home" },
@@ -17,10 +17,6 @@ const resources = [
 
 const socialLinks = [
   { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Youtube, href: "#", label: "YouTube" },
 ];
 
 export function Footer() {
