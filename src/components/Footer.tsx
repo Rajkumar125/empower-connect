@@ -9,10 +9,10 @@ const quickLinks = [
 ];
 
 const resources = [
-  { name: "FAQs", href: "#" },
-  { name: "Terms & Conditions", href: "#" },
-  { name: "Privacy Policy", href: "#" },
-  { name: "Grievance Redressal", href: "#" },
+  { name: "FAQs", href: "/resources#faqs" },
+  { name: "Terms & Conditions", href: "/resources#terms" },
+  { name: "Privacy Policy", href: "/resources#privacy" },
+  { name: "Grievance Redressal", href: "/resources#grievance" },
 ];
 
 const socialLinks = [
