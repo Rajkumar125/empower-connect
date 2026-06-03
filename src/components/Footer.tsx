@@ -16,7 +16,7 @@ const resources = [
 ];
 
 const socialLinks = [
-  { icon: Facebook, href: "#", label: "Facebook" },
+  { icon: Facebook, href: "https://www.facebook.com/share/1EPfyJLcwM/", label: "Facebook" },
 ];
 
 export function Footer() {
